@@ -1,4 +1,4 @@
-= Developing PWAs with Angular
+= Developing Progressive Web Apps with Angular
 Andreas HAESSLER <hae17487@spengergasse.at>
 v0.1, 2019-12-15
 :example-caption!:
@@ -12,7 +12,9 @@ ifdef::backend-pdf[:imagesdir: ../../../build/asciidoc/{backend}/images]
 
 == Abstract
 
-The application landscape is changing. Looking back into the last 20 years, we went from static desktop to dynamic web applications which do not need to be installed on the user's device.
+The application landscape is changing. Today, the majority of the population is using mobile phones to access applications and websites. When developing a web application, responsive design is among the first things web developers consider. What they are often missing, though, is that developing a mobile-optimized web app involves much more than just making sure the layout looks correct.
+
+For a truly great user experience, web apps need to be reliable, fast and engaging. They need to deal with network connectivity issues, while also being smooth on low-end devices and feeling like a native app to the user. This guide will explain how to develop a PWA providing a native app-like experience using the Angular framework.
 
 == Introduction
 
@@ -32,14 +34,14 @@ Here one should write the summary of the paper. It's usually between 1 and 5 par
 
 === Resources
 
-.Quellen
+.Sources
 [cols="40,20,40", options="header"]
 |===
 | URL
-| Datum
-| Anmerkung
+| Date
+| Remarks
 
-| http://www.kurier.at[Kurier]
-| 2017-11-28
-| Klaus UNGER
+| https://developers.google.com/web/progressive-web-apps[Google Developers]
+| 2019-12-19
+| High-level overview about PWAs
 |===
