@@ -14,25 +14,41 @@ ifdef::backend-pdf[:imagesdir: ../../../build/asciidoc/{backend}/images]
 
 The application landscape is changing. Today, the majority of the population is using mobile phones to access applications and websites. When developing a web application, responsive design is among the first things web developers consider. What they are often missing, though, is that developing a mobile-optimized web app involves much more than just making sure the layout looks correct.
 
-For a truly great user experience, web apps need to be reliable, fast and engaging. They need to deal with network connectivity issues, while also being smooth on low-end devices and feeling like a native app to the user. This guide will explain how to develop a PWA providing a native app-like experience using the Angular framework.
-
-== Introduction
-
-Here goes the introduction into the topic.
+For a truly great user experience, web apps need to be reliable, fast and engaging. They need to deal with network connectivity issues, while also being smooth on low-end devices and feeling like a native app to the user. This guide will explain how to develop a PWA providing a native-app-like experience using the Angular framework.
 
 <<<
 
-=== Chapter 1
+== Introduction
+
+For starters, what even is a progressive web app? What differentiates it from a normal web app? Google has defined four adjectives that need to be applied to make an ordinary single-page application a progressive web app:
+
+=== Fast
+
+When considering load times, every second counts. 53% of users will leave a site if it takes longer than 3 seconds to load. When the app finished loading, it should have smooth scrolling and jitter-free animations.
+
+=== Reliable
+
+As mobile phones rely on oftentimes unstable wireless connections, network failures are inevitable. Users may still want to access your application, even when they are at remote locations without network coverage.
+
+=== Engaging
+
+If users like your product, they might want to use it again after some time. But always having to open the browser and search for it is not ideal, especially if it is accessed very often. PWAs provide a way to install themselves onto the user's device and add it to their home screen, so it is always just one tap away.
+
+The following chapters will guide you through building a single page application using Angular and TypeScript, while implementing all common features of progressive web apps.
+
+<<<
+
+== Chapter 1
 
 Content of chapter 1.
 
-=== Summary
+== Summary
 
 Here one should write the summary of the paper. It's usually between 1 and 5 paragraphs long.
 
 <<<
 
-=== Resources
+== Resources
 
 .Sources
 [cols="40,20,40", options="header"]
@@ -44,4 +60,8 @@ Here one should write the summary of the paper. It's usually between 1 and 5 par
 | https://developers.google.com/web/progressive-web-apps[Google Developers]
 | 2019-12-19
 | High-level overview about PWAs
+
+| https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps[MDN]
+| 2019-12-19
+| High-level overview and further reading
 |===
