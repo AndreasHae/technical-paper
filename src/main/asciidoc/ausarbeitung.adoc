@@ -1,6 +1,6 @@
 = Developing Progressive Web Apps with Angular
 Andreas HAESSLER <hae17487@spengergasse.at>
-v0.1, 2019-12-15
+v0.2, 2020-01-10
 :example-caption!:
 :media: prepress
 :icons: font
@@ -34,13 +34,46 @@ As mobile phones rely on oftentimes unstable wireless connections, network failu
 
 If users like your product, they might want to use it again after some time. But always having to open the browser and search for it is not ideal, especially if it is accessed very often. PWAs provide a way to install themselves onto the user's device and add it to their home screen, so it is always just one tap away.
 
-The following chapters will guide you through building a single page application using Angular and TypeScript, while implementing all common features of progressive web apps.
+Progressive Web Apps can be built using plain HTML/CSS and Javascript, that approach doesn't scale very well. Luckily, the Javascript ecosystem offers more frontend frameworks than I can count. We will be using Angular, because it is quite mature and common these days.
 
 <<<
 
-== Chapter 1
+== Chapter 1: Getting started with Angular
 
-Content of chapter 1.
+Angular is one of the most prevalent Javascript frontend frameworks used today. It is developed by Google and backed by many large companies. At the time of writing, the most recent version is Angular 8.
+
+The easiest way to get started is to install the Angular CLI globally using npm:
+
+ npm install @angular/cli -g
+
+NOTE: If you do not have node.js or npm installed yet, you can get them from https://nodejs.org/en/[the official website] or using the package manager of your choice.
+
+You use the CLI with the `ng` command. You will need it very often. For now you can use it to generate your first Angular project:
+
+ ng new
+
+After executing, you will be asked for a name. I chose the name 'pwa-example'. The next question is about adding Angular Routing to the project. This is recommended for larger projects containing different pages, but for our example, you can choose 'no'.
+
+The last question is about which CSS preprocessor you want to use. It is recommended that you use one in large projects, but which one depends largely on personal preference. SCSS is the industry standard, some savage people enjoy the freedom of Stylus. For simplicity's sake, I will use plain CSS without preprocessing.
+
+Now, sit back and relax while the magic of Angular CLI downloads all dependencies and sets up your project structure. Depending on your internet connection and device, this might take a little while.
+
+NOTE: An advantage of Angular that you'll notice here is its opinionated fashion. Instead of having to fiddle with Javascript build tools for hours, you can use the Angular CLI project generator and jump right in.
+
+Now that the generator has done its work, you should have a working skeleton project in front of you. The most important one is the `src` directory, containing all source files for your app. Inside of it, you will find some other files and folders:
+
+- `app/`: This directory contains all components, pages and source files of your project.
+- `assets/`: This directory would contain static assets like fonts or images. Because the project just got generated, it is empty, except for a `.gitkeep` file, keeping the directory checked into version control.
+- `environments/`: This directory contains running configurations for your application. The default ones are `environment.ts` and `environment.prod.ts`. You will most likely not need to touch those for a long time.
+- `index.html`: The index page of your application. By default, it just contains the `app-root` component defined in `app/`.
+- `main.ts`: This is the file that makes your app run. It bootstraps your application module.
+- `styles.css`: Global application styles. All other styles are component-specific.
+- `polyfills.ts`: Polyfills for certain browser features required by Angular. You can add your own polyfills as well.
+- `test.ts`: Initializes environment when running tests.
+
+One thing you might have noticed is that there are no Javascript files in the project. That's because Angular uses Typescript, which is basically Javascript with a mostly sane type system. It will save you hours of "cannot read x of undefined" and related errors. The cool thing is that it's trivial to learn, especially if you have experience in both Javascript and any statically typed language like Java. You can literally learn it in 5 minutes using http://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html[the official guide].
+
+== Implementing PWA features using Angular
 
 == Summary
 
