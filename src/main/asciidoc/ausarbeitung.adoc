@@ -1,6 +1,6 @@
 = Developing Progressive Web Apps with Angular
 Andreas HAESSLER <hae17487@spengergasse.at>
-v0.2, 2020-01-10
+v0.3, 2020-01-12
 :example-caption!:
 :media: prepress
 :icons: font
@@ -38,7 +38,7 @@ Progressive Web Apps can be built using plain HTML/CSS and Javascript, that appr
 
 <<<
 
-== Chapter 1: Getting started with Angular
+== Getting started with Angular
 
 Angular is one of the most prevalent Javascript frontend frameworks used today. It is developed by Google and backed by many large companies. At the time of writing, the most recent version is Angular 8.
 
@@ -71,9 +71,77 @@ Now that the generator has done its work, you should have a working skeleton pro
 - `polyfills.ts`: Polyfills for certain browser features required by Angular. You can add your own polyfills as well.
 - `test.ts`: Initializes environment when running tests.
 
+NOTE: Angular is so nice, it even sets up a Git repository for you without asking! How courteous!
+
 One thing you might have noticed is that there are no Javascript files in the project. That's because Angular uses Typescript, which is basically Javascript with a mostly sane type system. It will save you hours of "cannot read x of undefined" and related errors. The cool thing is that it's trivial to learn, especially if you have experience in both Javascript and any statically typed language like Java. You can literally learn it in 5 minutes using http://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html[the official guide].
 
+== Writing an Angular-powered single page application
+
+The first thing there is to understand about Angular is how exactly it's going to make your life easier. In the modern web, applications are more than just some paragraphs of text with static HTML forms in between. In fact, some application structures are so complex that it's next to impossible to model them the plain old HTML/CSS + JS way. Files get big, logical flows get convoluted and developers get confused. There needs to be some structure.
+
+The most sensible thing to do is to break your application into smaller, manageable parts. Angular achieves this divide-and-conquer strategy in multiple ways, but the most important one is its component system. Technically, you _could_ write your whole application into one big app.component, but then you don't need Angular. The most practical approach is to break up your application into pages and reusable components. For example, you might have a specific form you need multiple times, or it could just be a button with special styling. Each of those components is self-contained and can manage its own internal state, which enables you to encapsulate implementation details. This really pays off in large enterprise applications where thousands of different components and pages are needed.
+
+If you open the `app` directory in your generated project, you will see your first Angular component. It consists of 4 different files:
+
+- `app.component.html`: The HTML template that represents your component
+- `app.component.ts`: The code that powers it
+- `app.component.spec.ts`: Automated unit tests
+- `app.component.css`: CSS styling
+
+You can ignore the 5th file (`app.module.ts`) for now.
+
+NOTE: Having four different files for one component is often seen as bloated or convoluted by developers coming from frameworks like Vue.js or React. Angular developers defend themselves by saying it helps to separate concerns.
+
+If you open the HTML template file, you will see plain old HTML. Upon taking a closer look, you will notice that Angular has enhanced its flavor of HTML with some special features called _directives_. These are special HTML attributes defined by Angular (or some library, or even yourself!) that change the behavior of your view. For example, you can replace the whole file with this:
+
+.app.component.html
+[source,angular2html]
+----
+<p>Count: {{count}}</p> // <1>
+<button (click)="increment()">Increase</button> // <2>
+<button (click)="decrement()">Decrease</button> // <2>
+----
+<1> The `{{count}}` tells Angular to insert the value of `count` defined in the component's source file.
+<2> The `(click)="..."` tells Angular to bind `click` events to the specified function calls.
+
+Now replace the contents of `app.component.ts` with the following:
+
+.app.component.ts
+[source,typescript]
+----
+import { Component } from '@angular/core';
+
+@Component({ // <1>
+  selector: 'app-root', // <2>
+  templateUrl: './app.component.html', // <3>
+  styleUrls: ['./app.component.css'] // <3>
+})
+export class AppComponent {
+  count: number = 0; // <4>
+
+  increment() {
+    this.count++;
+  }
+
+  decrement() {
+    this.count--;
+  }
+}
+----
+<1> The `@Component` decorator marks this class as an Angular component.
+<2> The `selector` attribute defines the name of the component in HTML templates. This means if you want to reuse this component somewhere else (like we are doing in `index.html`) then you need to refer to it as `<app-root></app-root>`.
+<3> `templateUrl` and `styleUrls` tell Angular where to find the HTML template and CSS styling files.
+<4> The class itself contains a field `count` with the type `number` and methods to increment or decrement it. These methods are called in the `click` event bindings defined in the HTML template.
+
+Now you can run the Angular development server to access your application with the command `ng serve` or short `ng s`. The first line of output will show a URL along the lines of `The project is running at http://localhost:4200/webpack-dev-server/`. Follow that link to reach your application:
+
+image::../images/first-angular-app.png[Your first Angular app, title=Your first Angular app]
+
+A counter, how lovely! And the "Increase" and "Decrease" buttons are working too! That's because you bound the content of the `<p>` tag to the `count` variable defined in your component, so if the variable gets changed, the view automatically updates.
+
 == Implementing PWA features using Angular
+
+Now that you have implemented your first Angular application, you can focus on making it a Progressive Web App.
 
 == Summary
 

@@ -80,6 +80,8 @@ caption:
 literal:
   font_color: b12146
   font_family: M+ 1mn
+code:
+  font_family: M+ 1mn
 conum:
   font_family: M+ 1mn
   font_color: $literal_font_color
