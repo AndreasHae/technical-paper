@@ -141,15 +141,90 @@ A counter, how lovely! And the "Increase" and "Decrease" buttons are working too
 
 == Implementing PWA features using Angular
 
-Now that you have implemented your first Angular application, you can focus on making it a Progressive Web App.
+Now that you have implemented your first Angular application, you can focus on making it a Progressive Web App. Luckily for you, making your Angular application a PWA is as easy as a single command:
+
+ ng add @angular/pwa
+
+This command automatically adds numerous web features to your app.
+
+=== Offline first
+
+The most important feature of a PWA is that it's available offline. Your application is actually offline-only, as it's just a counter in the local application memory. All we have to do now is ensure that our website loads even if the user is offline.
+
+_Wait, what?!_
+
+Yes, you read that right. We need our dynamically loaded web application to be available without fetching it from the CMS server. Just a few years ago, this sounded next to impossible. Luckily, modern web technologies allow us to cache the site content on the client so he or she only needs to fetch the application once. The specific technology is called _Service workers_.
+
+<<<
+
+To quote the official https://angular.io/guide/service-worker-intro[Angular documentation on service workers]:
+
+[quote]
+Service workers augment the traditional web deployment model and empower applications to deliver a user experience with the reliability and performance on par with natively-installed code.
+
+A service worker has been added to your application with a default caching configuration. You can test it by accessing your web app and then simulating offline-mode using Chrome's DevTools.
+
+=== Installability
+
+Now that our web app is available offline, we may not want our users to always enter our URL to access the app. Obviously, it seems really counterintuitive to try visiting a website while being offline. The solution is to 'install' our app to the user's device. We don't really install anything to the user's device - that's what the service worker is already taking care of - but we place an icon to the user's homescreen to instantly visit our website.
+
+For this we need a _Web Manifest_ file. Luckily, our handy Angular command already generated one for us at `src/manifest.webmanifest`. It is a JSON file containing some metadata about our app like names, URLs and icons.
+
+Most of the properties are self-explanatory. One of the more specific configuration options is the `display` property. It controls the appearance of your app when opened by the user. The following options are available:
+
+- `fullscreen`: Opens the app like a native fullscreen app, taking up the entire display
+- `standalone`: Opens the app like an ordinary native app, still showing the notification bar but hiding browser controls like the address bar
+- `minimal-ui`: Like `fullscreen` but still shows on-screen navigation buttons. _Only supported by Chrome for Mobile._
+- `browser`: Acts like a bookmark, opens a browser tab normally
+
+So the neat thing is that we can make our browser app indistinguishable from native apps, which gives it a more integrated look and feel.
+
+== Testing our app
+
+If we want to include our shiny service worker, testing becomes a bit more tricky because the regular Angular dev server does not support this use case. That means we need to build our app and serve it from the `dist/` folder. To build the app in production mode (including service worker, optimization etc.), use this command:
+
+ ng build --prod
+
+Your app has now been compiled to some optimized Javascript bundles, assets and an `index.html` file. The contents of the compiled are located at `dist/pwa-example/`. Now, we need a simple HTTP server to serve the files from this directory. You can for example use the Python `http.server` module for that, by running this command from the `dist/pwa-example/` folder:
+
+ python -m http.server
+
+If you do not have Python installed, you can install the `http-server` module from NPM and use it:
+
+ npm i -g http.server
+ http-server dist/pwa-example -o
+
+The last command will start a server in the specified directory and open a browser window.
+
+If you did everything correctly, you should get an installation prompt in your browser:
+
+image::../images/installation-prompt.png[PWA installation prompt, title=PWA installation prompt]
+
+When clicking 'Install', the app will be installed to your local machine and you can access it like any native app:
+
+image::../images/native-app.png[PWA running natively, title=PWA running natively]
 
 == Summary
 
-Here one should write the summary of the paper. It's usually between 1 and 5 paragraphs long.
+In conclusion, Progressive Web App technologies are a great way to give your users a native-app-like experience while in reality you are just recycling the web app you already have. This guide has shown you:
+
+- The abstract concepts of Progressive Web Apps
+- Basics of the Angular framework
+- Using Angular features in order to build PWAs
+- How Service Workers make your app available offline
+- How Web Manifests make your app appear like a native app
+
+=== Possible improvements
+
+Of course, for the sake of simplicity, the example given in this guide is extremely basic and will not suffice to deliver your users a truly great PWA experience. A large step into the right direction would be adding proper UI elements instead of using the native ones provided by the browser.
+
+The https://material.angular.io/[Angular Material] library provides lots of UI controls following Google's https://material.io/[Material Design] guidelines. Integrating it into your app means that UI elements will appear consistently when compared to native Android apps, so it really adds to the native look and feel.
 
 <<<
 
 == Resources
+
+The source code of the example app is available in this guide's https://github.com/AndreasHae/technical-paper[Github repository] under the folder `pwa-example`.
 
 .Sources
 [cols="40,20,40", options="header"]

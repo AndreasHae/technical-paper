@@ -4,12 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>at.spengergasse.hif</groupId>
-    <artifactId>asciidoctor-document</artifactId>
+    <groupId>at.spengergasse.hae17487</groupId>
+    <artifactId>technical-paper</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>asciidoctor-document</name>
+    <name>technical-paper</name>
 
     <properties>
         <project.build.pdf.directory>${project.build.directory}/asciidoc/pdf</project.build.pdf.directory>
