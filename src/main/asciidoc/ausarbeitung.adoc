@@ -139,6 +139,128 @@ image::../images/first-angular-app.png[Your first Angular app, title=Your first 
 
 A counter, how lovely! And the "Increase" and "Decrease" buttons are working too! That's because you bound the content of the `<p>` tag to the `count` variable defined in your component, so if the variable gets changed, the view automatically updates.
 
+== Adapting to native apps' design guidelines
+
+Now that we have got our app up and running, we may want to rework the design of the UI elements. Users expect your app to look consistently among other native applications. A great way of achieving this is implementing Google's https://material.io/[Material Design] guidelines.
+
+The easiest way to do this within Angular is using the great https://material.angular.io/[Angular Material] library. Let's install it via the Angular CLI:
+
+ ng add @angular/material
+
+The installer will add the NPM dependency of Angular Material, add the Roboto font and Material Design icons to your `index.html`, and add some basic CSS rules. When prompted while installing, you can just use the default options.
+
+The first thing we are going to materialize are the buttons. For each Angular Material component, there's a dedicated Angular module we need to import. In your `app.module.ts`, add the `MatButtonModule` to your imports.
+
+.app.module.ts
+[source,typescript]
+----
+...
+import { MatButtonModule } from '@angular/material/button';
+
+@NgModule({
+  ...
+  imports: [
+    ...
+    MatButtonModule
+  ],
+})
+export class AppModule { }
+----
+
+Then, use it in your `app.component.html` as such:
+
+
+.app.component.html
+[source,angular2html]
+----
+<p>Count: {{count}}</p>
+<button mat-raised-button (click)="increment()">Increase</button>
+<button mat-raised-button (click)="decrement()">Decrease</button>
+----
+
+Now, let's add some styling to the layout:
+
+.app.component.css
+[source,css]
+----
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%
+}
+
+button {
+  margin: .5em;
+}
+----
+
+NOTE: The `:host` pseudo-class selects the Angular component itself (in this case the `app-root`).
+
+Great, now the app is starting to look more native-like:
+
+image::../images/styled-app.png[App with Material styling, title=App with Material styling]
+
+The only thing missing is a toolbar so let's add one. Import the module:
+
+.app.module.ts
+[source,typescript]
+----
+...
+import { MatToolbarModule } from '@angular/material/button';
+
+@NgModule({
+  ...
+  imports: [
+    ...
+    MatToolbarModule
+  ],
+})
+export class AppModule { }
+----
+
+And use it in the component:
+
+.app.component.html
+[source,angular2html]
+----
+<mat-toolbar class="mat-elevation-z4" color="primary">
+  <span>PWA Example</span>
+</mat-toolbar>
+<div>
+  <p>Count: {{count}}</p>
+  <button mat-raised-button (click)="increment()">Increase</button>
+  <button mat-raised-button (click)="decrement()">Decrease</button>
+</div>
+----
+
+NOTE: The `mat-elevation-z4` class adds https://material.io/design/environment/elevation.html[elevation] to the toolbar, as specified in the Material Design spec.
+
+Now we need to adapt our styling:
+
+.app.component.css
+[source,css]
+----
+:host > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80%
+}
+
+button {
+  margin: .5em;
+}
+----
+
+Let's look at the result:
+
+image::../images/styled-app-toolbar.png[Final result, title=Final result]
+
+Now we're talking! Our web app looks like a native Android app.
+
 == Implementing PWA features using Angular
 
 Now that you have implemented your first Angular application, you can focus on making it a Progressive Web App. Luckily for you, making your Angular application a PWA is as easy as a single command:
@@ -210,15 +332,10 @@ In conclusion, Progressive Web App technologies are a great way to give your use
 
 - The abstract concepts of Progressive Web Apps
 - Basics of the Angular framework
+- Using native-like components using Angular Material
 - Using Angular features in order to build PWAs
 - How Service Workers make your app available offline
 - How Web Manifests make your app appear like a native app
-
-=== Possible improvements
-
-Of course, for the sake of simplicity, the example given in this guide is extremely basic and will not suffice to deliver your users a truly great PWA experience. A large step into the right direction would be adding proper UI elements instead of using the native ones provided by the browser.
-
-The https://material.angular.io/[Angular Material] library provides lots of UI controls following Google's https://material.io/[Material Design] guidelines. Integrating it into your app means that UI elements will appear consistently when compared to native Android apps, so it really adds to the native look and feel.
 
 <<<
 
