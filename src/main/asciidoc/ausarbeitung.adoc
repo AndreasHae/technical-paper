@@ -1,6 +1,6 @@
 = Developing Progressive Web Apps with Angular
 Andreas HAESSLER <hae17487@spengergasse.at>
-v0.3, 2020-01-12
+v1.0, 2020-03-25
 :example-caption!:
 :media: prepress
 :icons: font
@@ -14,13 +14,13 @@ ifdef::backend-pdf[:imagesdir: ../../../build/asciidoc/{backend}/images]
 
 The application landscape is changing. Today, the majority of the population is using mobile phones to access applications and websites. When developing a web application, responsive design is among the first things web developers consider. What they are often missing, though, is that developing a mobile-optimized web app involves much more than just making sure the layout looks correct.
 
-For a truly great user experience, web apps need to be reliable, fast and engaging. They need to deal with network connectivity issues, while also being smooth on low-end devices and feeling like a native app to the user. This guide will explain how to develop a PWA providing a native-app-like experience using the Angular framework.
+For a truly great user experience, web apps need to be reliable, fast and engaging. They need to deal with network connectivity issues, while also being smooth on low-end devices and feeling like a native app to the user. This guide will explain how to develop a progressive web app (PWA) providing a native-app-like experience using the Angular framework.
 
 <<<
 
 == Introduction
 
-For starters, what even is a progressive web app? What differentiates it from a normal web app? Google has defined four adjectives that need to be applied to make an ordinary single-page application a progressive web app:
+For starters, what even is a progressive web app? What differentiates it from a normal web app? Google has defined three adjectives that need to be applied to make an ordinary single-page application a progressive web app:
 
 === Fast
 
@@ -46,7 +46,7 @@ The easiest way to get started is to install the Angular CLI globally using npm:
 
  npm install @angular/cli -g
 
-NOTE: If you do not have node.js or npm installed yet, you can get them from https://nodejs.org/en/[the official website] or using the package manager of your choice.
+NOTE: If you do not have node.js or npm installed yet, you can get them from https://nodejs.org/en/[the official website] or by using the package manager of your choice.
 
 You use the CLI with the `ng` command. You will need it very often. For now you can use it to generate your first Angular project:
 
@@ -132,6 +132,8 @@ export class AppComponent {
 <2> The `selector` attribute defines the name of the component in HTML templates. This means if you want to reuse this component somewhere else (like we are doing in `index.html`) then you need to refer to it as `<app-root></app-root>`.
 <3> `templateUrl` and `styleUrls` tell Angular where to find the HTML template and CSS styling files.
 <4> The class itself contains a field `count` with the type `number` and methods to increment or decrement it. These methods are called in the `click` event bindings defined in the HTML template.
+
+WARNING: Do not confuse the `click` event with the `onclick` attribute. The former is an event provided by Angular's event system, while the latter handles native browser events without Angular. This might be a source of misbehavior.
 
 Now you can run the Angular development server to access your application with the command `ng serve` or short `ng s`. The first line of output will show a URL along the lines of `The project is running at http://localhost:4200/webpack-dev-server/`. Follow that link to reach your application:
 
